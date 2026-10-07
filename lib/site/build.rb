@@ -50,8 +50,8 @@ module Site
 
     def assets
       FileUtils.mkdir_p(@output.join("assets"))
-      Dir.glob(ROOT.join("vendor", "*")).each { FileUtils.cp(it, @output.join("assets")) }
-      Dir.glob(ROOT.join("assets", "*")).each { FileUtils.cp(it, @output.join("assets")) }
+      # Files only: on CI, Bundler installs gems under vendor/bundle.
+      Dir.glob(ROOT.join("{vendor,assets}", "*")).select { File.file?(it) }.each { FileUtils.cp(it, @output.join("assets")) }
       File.write(@output.join("assets", "rouge.css"), "#{Highlight.css}\n")
       File.write(@output.join("CNAME"), "polycubes.org\n")
     end
