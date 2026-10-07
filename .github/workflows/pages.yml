@@ -26,11 +26,13 @@ jobs:
           repository: polycubing/census
           path: census
           sparse-checkout: |
-            lib
-            data
+            /lib/
+            /*.gemspec
+            /data/*.json
+            /data/*/*/shape.json
+            /data/*/*/corona*.json
           sparse-checkout-cone-mode: false
           filter: blob:none
-      - run: cd census && git sparse-checkout set --no-cone 'lib/**' 'data/*/*/shape.json' 'data/*/*/corona*.json' 'data/*.json' '*.gemspec'
       - uses: ruby/setup-ruby@v1
         with:
           working-directory: site
