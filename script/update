@@ -1,0 +1,7 @@
+#!/bin/bash
+# Pull the census and update gems.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+git -C ../census pull --ff-only
+bundle install

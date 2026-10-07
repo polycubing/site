@@ -1,0 +1,9 @@
+#!/bin/bash
+# Build the site into public/ from the census at ../census.
+#
+#   script/build            everything
+#   script/build 8          only sizes through 8 (faster while iterating)
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+bundle exec ruby -Ilib -e 'require "site"; Site::Build.run(max_size: ARGV[0] && Integer(ARGV[0]))' -- "$@"

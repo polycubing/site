@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          path: site
+      # The census, for its geometry and its records. Records only, no meshes:
+      # the whole data tree is 16 GB and the pages need a few hundred MB of it.
+      - uses: actions/checkout@v5
+        with:
+          repository: polycubing/census
+          path: census
+          sparse-checkout: |
+            lib
+            data
+          sparse-checkout-cone-mode: false
+          filter: blob:none
+      - run: cd census && git sparse-checkout set --no-cone 'lib/**' 'data/*/*/shape.json' 'data/*/*/corona*.json' 'data/*.json' '*.gemspec'
+      - uses: ruby/setup-ruby@v1
+        with:
+          working-directory: site
+          bundler-cache: true
+      - run: cd site && script/test

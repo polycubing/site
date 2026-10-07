@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title ? "#{h title} · " : "" %>Polycube Tiling Census</title>
+  <link rel="stylesheet" href="/assets/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/rouge.css">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script>
+    const scheme = window.matchMedia("(prefers-color-scheme: dark)");
+    const applyTheme = () => document.documentElement.dataset.bsTheme = scheme.matches ? "dark" : "light";
+    applyTheme();
+    scheme.addEventListener("change", applyTheme);
+  </script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-md bg-body-tertiary border-bottom">
+    <div class="container">
+      <a class="navbar-brand" href="/">polycubes.org</a>
+      <ul class="navbar-nav me-auto flex-wrap">
+        <li class="nav-item"><span class="nav-link text-body-secondary pe-1">n =</span></li>
+        <% (1..9).each do |n| -%>
+        <li class="nav-item"><a class="nav-link px-1 mono" href="/<%= n %>/"><%= n %></a></li>
+        <% end -%>
+        <li class="nav-item ms-md-3"><a class="nav-link" href="/non-tilers/">non-tilers</a></li>
+        <li class="nav-item"><a class="nav-link" href="/open/">open</a></li>
+        <li class="nav-item"><a class="nav-link" href="/glossary/">glossary</a></li>
+        <li class="nav-item"><a class="nav-link" href="/verify/">verify</a></li>
+      </ul>
+      <form class="d-flex" role="search" onsubmit="location.href = '/' + this.id.value.trim().replace(/^\/|\/$/g, '') + '/'; return false;">
+        <input class="form-control form-control-sm" name="id" type="search" placeholder="go to id, e.g. 9/2127" aria-label="shape id">
+      </form>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+<%= body %>
+  </main>
+
+  <footer class="container py-4 text-body-secondary small border-top">
+    Data and code are public domain, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.
+    <a href="https://github.com/polycubing/census">The census</a> · <a href="/verify/">Don't trust us, check us.</a>
+  </footer>
+</body>
+</html>

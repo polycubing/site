@@ -1,0 +1,42 @@
+{
+  "id": "8/1309",
+  "n": 8,
+  "cells": [[0, 0, 0], [0, 0, 1], [0, 0, 2], [0, 1, 0], [0, 1, 2], [0, 2, 0], [0, 2, 1], [0, 2, 2]],
+  "symmetry_order": 8,
+  "chiral": false,
+  "mirror_id": "8/1309",
+  "verdict": "non_tiler",
+  "tiles_rotations_only": false,
+  "tiles_with_reflections": false,
+  "certificate": {
+    "adjacency": "26",
+    "checked": {
+      "checker": "drat-trim 2e3b2dc",
+      "date": "2026-10-06",
+      "seconds": 24.0,
+      "verdict": "VERIFIED"
+    },
+    "derived_from": null,
+    "heesch": 1,
+    "provenance": "computed",
+    "refutation": "cnf/corona2.drat",
+    "refutation_kind": "proof",
+    "refutation_sha256": "1c8a3d6a1992d85268fb758b9effe2dd2ef007439f55cface220c06d117b9bd0",
+    "solved_with": "kissat 4.0.4, re-solved 2026-10-06 on the byte-identical formula; replaces the 2026-07 proof (kissat version unrecorded, sha256 621091ca…, drat-trim VERIFIED 2026-07-07 and 2026-10-06); corona-2 UNSAT also reproduced by CaDiCaL in 2026-07",
+    "type": "heesch"
+  },
+  "heesch": 1,
+  "budgets": { "box_max_volume": 128, "corona_depth": 2, "torus_max_index": 152 },
+  "credits": {
+    "prior_art": null,
+    "solved_by": "polycube-census v0.1.0",
+    "verified_by": "Shane Becker via drat-trim (s VERIFIED) and CaDiCaL, 2026-07-07"
+  },
+  "reached": { "corona_refuted": 2 },
+  "stages": [
+    { "outcome": "exhausted", "stage": "box", "volume": 128 },
+    { "index": 152, "outcome": "exhausted", "stage": "torus" },
+    { "depth": 1, "outcome": "witnessed", "stage": "corona" },
+    { "depth": 2, "outcome": "refuted", "stage": "corona" }
+  ]
+}

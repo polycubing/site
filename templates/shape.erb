@@ -1,0 +1,69 @@
+<header class="mb-4">
+  <h1 class="display-6 mb-1">
+    <span class="mono"><%= h record.id %></span>
+    <% if record.nickname -%>
+    <small class="text-body-secondary"><%= h record.nickname %></small>
+    <% end -%>
+  </h1>
+  <p class="lead mb-2">
+    <span class="badge rounded-pill verdict-<%= record.verdict %> fs-6"><%= record.badge %></span>
+    <%= h record.headline %>
+  </p>
+</header>
+
+<div class="row g-4">
+  <div class="col-lg-7">
+    <div id="viewer"></div>
+    <div class="btn-group mt-2" role="group" aria-label="layers">
+      <% record.layers.each_with_index do |layer, index| -%>
+      <input type="radio" class="btn-check" name="layer" id="layer-<%= index %>" value="<%= index %>" autocomplete="off"<%= index.zero? ? " checked" : "" %>>
+      <label class="btn btn-outline-secondary btn-sm" for="layer-<%= index %>"><%= h layer[:label] %></label>
+      <% end -%>
+    </div>
+    <span class="text-body-secondary small ms-2">drag to orbit, scroll to zoom</span>
+  </div>
+
+  <div class="col-lg-5">
+    <dl class="facts row">
+      <dt class="col-5">cells</dt><dd class="col-7"><%= record.size %>, bounding box <%= record.extent.join("×") %></dd>
+      <dt class="col-5"><a href="/glossary/#symmetry-order">symmetry order</a></dt><dd class="col-7"><%= record.fields[:symmetry_order] %></dd>
+      <dt class="col-5"><a href="/glossary/#chiral">chiral</a></dt>
+      <dd class="col-7"><% if record.chiral? -%>yes, twin <a class="mono" href="/<%= record.mirror_id %>/"><%= record.mirror_id %></a><% else -%>no, its own mirror image<% end -%></dd>
+      <% if record.heesch -%>
+      <dt class="col-5"><a href="/glossary/#heesch-number">Heesch number</a></dt><dd class="col-7"><%= record.heesch %></dd>
+      <% elsif record.corona_witnessed -%>
+      <dt class="col-5"><a href="/glossary/#heesch-number">Heesch number</a></dt><dd class="col-7">≥ <%= record.corona_witnessed %></dd>
+      <% end -%>
+      <dt class="col-5">record</dt>
+      <dd class="col-7"><a class="mono" href="https://github.com/polycubing/census/blob/main/data/<%= record.id %>/shape.json">data/<%= record.id %>/shape.json</a></dd>
+    </dl>
+
+    <h2 class="h5 mt-4"><a href="/glossary/#stages">Stages</a></h2>
+    <table class="table table-sm">
+      <thead><tr><th>stage</th><th>outcome</th><th class="text-end">at</th></tr></thead>
+      <tbody>
+        <% record.stages.each do |stage| -%>
+        <tr><td><%= h stage[:stage] %></td><td><%= h stage[:outcome] %></td><td class="text-end mono"><%= stage[:volume] || stage[:index] || stage[:depth] %></td></tr>
+        <% end -%>
+      </tbody>
+    </table>
+
+    <h2 class="h5 mt-4">Downloads</h2>
+    <ul class="list-unstyled small">
+      <% record.downloads.each do |download| -%>
+      <li><a href="<%= download[:url] %>"><%= h download[:name] %></a> <%= h download[:what] %></li>
+      <% end -%>
+    </ul>
+  </div>
+</div>
+
+<section class="mt-5">
+  <details>
+    <summary>The record, as stored</summary>
+    <pre class="highlight mono mt-2"><code><%= h record.raw %></code></pre>
+  </details>
+</section>
+
+<script id="page" type="application/json"><%= json(layers: record.layers) %></script>
+<script src="/assets/viewer.js"></script>
+<script src="/assets/record.js"></script>

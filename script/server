@@ -1,0 +1,7 @@
+#!/bin/bash
+# Serve public/ locally.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+echo "http://localhost:${PORT:-8000}/"
+bundle exec ruby -run -e httpd public -p "${PORT:-8000}"

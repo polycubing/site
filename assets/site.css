@@ -1,0 +1,12 @@
+#viewer { width: 100%; aspect-ratio: 4 / 3; background: var(--bs-tertiary-bg); border-radius: .5rem; touch-action: none; overflow: hidden; }
+#viewer canvas { display: block; width: 100% !important; height: 100% !important; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em; }
+.verdict-tiler { background: #15803d; }
+.verdict-non_tiler { background: #b91c1c; }
+.verdict-open { background: #b45309; }
+dl.facts dt { font-weight: 500; color: var(--bs-secondary-color); }
+dl.facts dd { margin-bottom: .5rem; }
+pre.highlight { padding: 1rem; border-radius: .5rem; overflow-x: auto; }
+.prose { max-width: 48rem; }
+.prose h2 { font-size: 1.25rem; margin-top: 2rem; }
+.prose h3 { font-size: 1.05rem; margin-top: 1.5rem; }

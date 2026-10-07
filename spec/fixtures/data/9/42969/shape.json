@@ -1,0 +1,36 @@
+{
+  "id": "9/42969",
+  "n": 9,
+  "cells": [[0, 0, 1], [0, 1, 0], [0, 1, 1], [0, 1, 2], [1, 0, 1], [1, 0, 2], [1, 1, 2], [1, 2, 2], [2, 0, 1]],
+  "symmetry_order": 3,
+  "chiral": true,
+  "mirror_id": "9/42947",
+  "verdict": "non_tiler",
+  "tiles_rotations_only": false,
+  "tiles_with_reflections": false,
+  "certificate": {
+    "adjacency": "26",
+    "derived_from": "9/42947",
+    "heesch": 1,
+    "provenance": "derived",
+    "refutation": "mirror of 9/42947 — a tiling of this shape would reflect to a tiling of 9/42947, which its corona-2 refutation forbids",
+    "refutation_kind": "ledger",
+    "refutation_sha256": null,
+    "solved_with": "witness and verdict mirrored from 9/42947; cube-and-conquer on kissat 4.0.4 (colo, 50 cores): 4096 sign-cubes + 475 clause-branch + 8225 clause-branch cubes, 12868 ledger entries, 12615 refutations, zero SATISFIABLE; cover verified by script/audit-cubes 2026-10-06; ledger-backed, per-cube DRAT campaign pending",
+    "type": "heesch"
+  },
+  "heesch": 1,
+  "budgets": { "box_max_volume": 96, "corona_depth": 2, "torus_max_index": 72 },
+  "credits": {
+    "prior_art": null,
+    "solved_by": "polycube-census v0.1.0 (mirrored from 9/42947)",
+    "verified_by": null
+  },
+  "reached": { "corona_refuted": 2 },
+  "stages": [
+    { "outcome": "exhausted", "stage": "box", "volume": 96 },
+    { "index": 72, "outcome": "exhausted", "stage": "torus" },
+    { "depth": 1, "outcome": "witnessed", "stage": "corona" },
+    { "depth": 2, "outcome": "refuted", "stage": "corona" }
+  ]
+}

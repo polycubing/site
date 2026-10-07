@@ -1,0 +1,11 @@
+#!/bin/bash
+# Install dependencies: the gems, and the census checkout beside this one.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+if [ ! -d ../census ]; then
+  echo "expected the census at ../census (git clone https://github.com/polycubing/census ../census)" >&2
+  exit 1
+fi
+
+bundle install

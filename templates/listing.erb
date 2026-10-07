@@ -1,0 +1,44 @@
+<h1 class="h3 mb-1"><%= h heading %></h1>
+<p class="text-body-secondary"><%= h intro %></p>
+
+<% unless highlights.empty? -%>
+<h2 class="h5 mt-4">Worth a look</h2>
+<table class="table table-sm table-hover">
+  <thead><tr><th>id</th><th>name</th><th>verdict</th><th>how</th><th>chiral</th></tr></thead>
+  <tbody>
+    <% highlights.each do |entry| -%>
+    <tr>
+      <td><a class="mono" href="<%= entry.path %>"><%= h entry.id %></a></td>
+      <td><%= h entry.nickname %></td>
+      <td><span class="badge rounded-pill verdict-<%= entry.verdict %>"><%= entry.badge %></span></td>
+      <td><%= h entry.how %></td>
+      <td><%= entry.chiral ? "yes" : "" %></td>
+    </tr>
+    <% end -%>
+  </tbody>
+</table>
+<h2 class="h5 mt-4">All</h2>
+<% end -%>
+
+<table class="table table-sm table-hover">
+  <thead><tr><th>id</th><th>name</th><th>verdict</th><th>how</th><th>chiral</th></tr></thead>
+  <tbody>
+    <% page.rows.each do |entry| -%>
+    <tr>
+      <td><a class="mono" href="<%= entry.path %>"><%= h entry.id %></a></td>
+      <td><%= h entry.nickname %></td>
+      <td><span class="badge rounded-pill verdict-<%= entry.verdict %>"><%= entry.badge %></span></td>
+      <td><%= h entry.how %></td>
+      <td><%= entry.chiral ? "yes" : "" %></td>
+    </tr>
+    <% end -%>
+  </tbody>
+</table>
+
+<% if page.total > 1 -%>
+<nav aria-label="pages" class="d-flex align-items-center gap-3">
+  <% if page.previous_path -%><a class="btn btn-outline-secondary btn-sm" href="<%= page.previous_path %>">← previous</a><% end -%>
+  <span class="text-body-secondary small">page <%= page.number %> of <%= page.total %></span>
+  <% if page.next_path -%><a class="btn btn-outline-secondary btn-sm" href="<%= page.next_path %>">next →</a><% end -%>
+</nav>
+<% end -%>

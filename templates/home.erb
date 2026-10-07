@@ -1,0 +1,30 @@
+<div class="row g-5">
+  <div class="col-lg-7">
+<%= page.html %>
+  </div>
+  <div class="col-lg-5">
+    <h2 class="h5">Scoreboard</h2>
+    <table class="table table-sm">
+      <thead><tr><th>n</th><th class="text-end">shapes</th><th class="text-end">tilers</th><th class="text-end">non-tilers</th><th class="text-end">open</th></tr></thead>
+      <tbody>
+        <% counts.each do |row| -%>
+        <tr>
+          <td><a class="mono" href="/<%= row[:size] %>/"><%= row[:size] %></a></td>
+          <td class="text-end mono"><%= number row[:shapes] %></td>
+          <td class="text-end mono"><%= number row[:tilers] %></td>
+          <td class="text-end mono"><%= row[:non_tilers].zero? ? "" : number(row[:non_tilers]) %></td>
+          <td class="text-end mono"><%= row[:open].zero? ? "" : number(row[:open]) %></td>
+        </tr>
+        <% end -%>
+        <tr class="fw-semibold">
+          <td>all</td>
+          <td class="text-end mono"><%= number counts.sum { it[:shapes] } %></td>
+          <td class="text-end mono"><%= number counts.sum { it[:tilers] } %></td>
+          <td class="text-end mono"><%= number counts.sum { it[:non_tilers] } %></td>
+          <td class="text-end mono"><%= number counts.sum { it[:open] } %></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="small text-body-secondary">Every shape through n = 9 carries a verdict and a certificate anyone can recheck. <a href="/verify/">How.</a></p>
+  </div>
+</div>

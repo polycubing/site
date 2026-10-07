@@ -1,0 +1,7 @@
+#!/bin/bash
+# CI entry point: specs, linter, then a full build.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+script/test
+script/build
