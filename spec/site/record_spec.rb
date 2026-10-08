@@ -85,5 +85,11 @@ RSpec.describe Site::Record do
                               "https://cdn.jsdelivr.net/gh/polycubing/census@main/data/9/2127/corona2.json")
       expect(urls.grep(/tiling/)).to be_empty
     end
+
+    it "points tiling chunks at the bucket, with their colours beside them" do
+      urls = record("9/2500").downloads.map { it[:url] }
+      expect(urls).to include("https://polycubes.s3.us-west-2.amazonaws.com/public/meshes/9/2500/tiling.obj",
+                              "https://polycubes.s3.us-west-2.amazonaws.com/public/meshes/9/2500/tiling.mtl")
+    end
   end
 end

@@ -61,9 +61,7 @@ module Site
       end
     end
 
-    def badge
-      { "tiler" => "TILER", "non_tiler" => "NON-TILER", "open" => "OPEN" }.fetch(verdict, "UNRESOLVED")
-    end
+    def badge = { "tiler" => "TILER", "non_tiler" => "NON-TILER", "open" => "OPEN" }.fetch(verdict, "UNRESOLVED")
 
     # A paragraph, for the shape's own page.
     def headline
@@ -88,15 +86,19 @@ module Site
       tags
     end
 
+    # Records and small meshes come from the census repository through
+    # jsDelivr. Tiling chunks are too big for git and live in the bucket.
     def downloads
       base = "https://cdn.jsdelivr.net/gh/polycubing/census@main/data/#{id}"
-      list = [["model.stl", "the shape, printable"]]
-      list << ["tiling.obj", "a chunk of the tiling, one colour per copy"] if verdict == "tiler"
+      meshes = "https://polycubes.s3.us-west-2.amazonaws.com/public/meshes/#{id}"
+      list = [["model.stl", "the shape, printable", base]]
+      list << ["tiling.obj", "a chunk of the tiling, one colour per copy", meshes] if verdict == "tiler"
+      list << ["tiling.mtl", "the chunk's colours, saved beside the .obj", meshes] if verdict == "tiler"
       layers.filter_map { it[:label][/corona (\d+)/, 1] }.each do |depth|
-        list << ["corona#{depth}.json", "the depth-#{depth} witness, as placements"]
+        list << ["corona#{depth}.json", "the depth-#{depth} witness, as placements", base]
       end
-      list << ["shape.json", "the record"]
-      list.map { |name, what| { name:, what:, url: "#{base}/#{name}" } }
+      list << ["shape.json", "the record", base]
+      list.map { |name, what, from| { name:, what:, url: "#{from}/#{name}" } }
     end
 
     private
