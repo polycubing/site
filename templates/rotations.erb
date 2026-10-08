@@ -1,13 +1,13 @@
 <article class="prose">
   <h1 class="h3 mb-4"><%= h title %></h1>
 <%= page.html %>
-  <table class="table table-sm mono">
+  <table class="table table-sm table-striped">
     <thead>
-      <tr><th class="text-end">rotation</th><th>new x</th><th>new y</th><th>new z</th><th>turn</th></tr>
+      <tr><th class="text-start">rotation</th><th class="text-end">new x</th><th class="text-end">new y</th><th class="text-end">new z</th><th>turn</th></tr>
     </thead>
     <tbody>
     <% rotations.each_with_index do |rotation, index| -%>
-      <tr><td class="text-end"><%= index %></td><% rotation.images.each do |image| -%><td><%= image %></td><% end -%><td><%= h rotation.turn %></td></tr>
+      <tr class="mono"><td class="text-start"><%= index %></td><% rotation.images.each do |image| -%><td class="text-end"><%= image %></td><% end -%><td><%= h rotation.turn %></td></tr>
     <% end -%>
     </tbody>
   </table>
