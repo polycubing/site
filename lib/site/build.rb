@@ -62,7 +62,9 @@ module Site
         next if slug == "home"
 
         page = Markdown.new(path:)
-        write("/#{slug}/", Page.new(template: "prose", title: page.title, locals: { page: }).render)
+        template = slug == "rotations" ? "rotations" : "prose"
+        locals = { page:, rotations: Census::Rotation.all }
+        write("/#{slug}/", Page.new(template:, title: page.title, locals:).render)
       end
     end
 

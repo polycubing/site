@@ -30,8 +30,14 @@ RSpec.describe Site::Build do
     expect(page("heesch/1")).not_to include('href="/9/2127/"')
   end
 
+  it "writes the rotation table from the census code" do
+    html = page("rotations")
+    expect(html).to include("The 24 rotations", "<td>-z</td>", "120° about +x+y-z")
+    expect(html.scan("<tr><td").size).to eq(24)
+  end
+
   it "writes the prose pages and the assets" do
-    expect(page("glossary")).to include("Heesch number")
+    expect(page("glossary")).to include("Heesch number", 'href="/rotations/"')
     expect(File).to exist(File.join(@output, "assets", "viewer.js"))
     expect(File).to exist(File.join(@output, "assets", "rouge.css"))
     expect(File).to exist(File.join(@output, "assets", "bootstrap.min.css.map"))

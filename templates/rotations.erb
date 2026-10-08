@@ -1,0 +1,14 @@
+<article class="prose">
+  <h1 class="h3 mb-4"><%= h title %></h1>
+<%= page.html %>
+  <table class="table table-sm mono">
+    <thead>
+      <tr><th class="text-end">rotation</th><th>new x</th><th>new y</th><th>new z</th><th>turn</th></tr>
+    </thead>
+    <tbody>
+    <% rotations.each_with_index do |rotation, index| -%>
+      <tr><td class="text-end"><%= index %></td><% rotation.images.each do |image| -%><td><%= image %></td><% end -%><td><%= h rotation.turn %></td></tr>
+    <% end -%>
+    </tbody>
+  </table>
+</article>

@@ -15,6 +15,8 @@ script/setup
 script/verify
 ```
 
+A checker written from scratch needs one convention from us: placements name rotations by number, and [the 24 rotations](/rotations/) page spells out what each number does.
+
 It also pins the shape counts of every size to the Online Encyclopedia of Integer Sequences ([A000162](https://oeis.org/A000162) and [A038119](https://oeis.org/A038119)) and checks that every record's stored facts agree with each other.
 
 ## Refutations, with an independent checker

@@ -40,6 +40,10 @@ The order the census tries things: box tiling, then periodic tiling, then corona
 
 How many of the 24 rotations of the cube leave the shape looking the same. A straight bar has 8. A shape with no symmetry has 1. The more symmetric a shape, the fewer distinct ways it can be placed.
 
+## Rotation number {#rotation}
+
+Which of the 24 rotations a placement uses, as a number from 0 to 23. [The 24 rotations](/rotations/) page lists them all: where each new coordinate comes from, and the same turn as an axis and an angle.
+
 ## Chiral {#chiral}
 
 A shape is chiral if no rotation turns it into its mirror image, like a left and a right screw. Chiral shapes come in pairs, and each page links to its twin. A shape tiles space if and only if its mirror image does, so the census solves one and reflects the certificate for the other.
