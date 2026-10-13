@@ -29,6 +29,10 @@ A non-tiler's record names a DRAT proof by its SHA-256 digest. The formula and t
 
 drat-trim is Marijn Heule's checker, built from [its source](https://github.com/marijnheule/drat-trim). It knows nothing about polycubes. It only confirms that the proof refutes the formula it was given.
 
+## Refutations found cube by cube
+
+A formula too hard to refute in one piece is split into cubes, each a partial assignment, and every cube is refuted on its own. The record then names a manifest beside it, such as [`corona2.proofs.json`](https://github.com/polycubing/census/blob/main/data/9/42947/cnf/corona2.proofs.json) for the triskelion, with one line per leaf cube: its literals, its proof's digest and size, the URL of the proof in the bucket, and the compressed file's checksum. To recheck one cube, download its proof, `xz -d` it, confirm the `sha256`, append the cube's literals to the formula as unit clauses, and run `drat-trim` on that. The theorem is the whole list, 9,103 lines for the triskelion, and the cover of cubes is itself checked by the census's `script/audit-cubes`.
+
 ## The formula itself
 
 What drat-trim does not check is that the formula means what we say it means. That reading, "this formula is satisfiable exactly when a corona of this depth exists", is the one thing left to trust, and the code that writes the formula is in the open for anyone to read.
