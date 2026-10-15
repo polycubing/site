@@ -1,6 +1,11 @@
 #viewer { width: 100%; aspect-ratio: 4 / 3; background: var(--bs-tertiary-bg); border-radius: .5rem; touch-action: none; overflow: hidden; }
 #viewer canvas { display: block; width: 100% !important; height: 100% !important; }
 .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em; }
+/* On a phone the nav links wrap into rows and the search box takes its own row. */
+@media (max-width: 767.98px) {
+  .navbar .nav-link { padding-top: .25rem; padding-bottom: .25rem; }
+  .navbar form[role=search] { width: 100%; margin-top: .25rem; }
+}
 .verdict-tiler { background: #15803d; }
 .verdict-non_tiler { background: #b91c1c; }
 .verdict-open { background: #b45309; }
